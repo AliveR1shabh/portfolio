@@ -44,7 +44,11 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(1.45);
+  transform: scale(1.1);
+
+  @media (min-width: 768px) {
+    transform: scale(1.45);
+  }
 
   .hire-link {
     display: flex;

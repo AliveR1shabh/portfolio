@@ -79,7 +79,7 @@ const CtaPivot = () => {
         <section
             id="contact"
             ref={sectionRef}
-            style={{ minHeight: '100svh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: '0 64px', backgroundColor: '#000000', color: '#e2e2e2', transition: 'background-color 0.1s, color 0.1s' }}
+            style={{ minHeight: '100svh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: '0 var(--spacing-gutter, 24px)', backgroundColor: '#000000', color: '#e2e2e2', transition: 'background-color 0.1s, color 0.1s' }}
         >
             {/* ── Logo Loop Marquee Background ── */}
             <div style={{ position: 'absolute', inset: 0, zIndex: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '60px', overflow: 'hidden', pointerEvents: 'none', opacity: 0.15 }}>
@@ -90,16 +90,16 @@ const CtaPivot = () => {
 
             {/* ── Ghost Text ── */}
             <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', pointerEvents: 'none', zIndex: 1 }}>
-                <div style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '15vw', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px rgba(0,0,0,0.05)', whiteSpace: 'nowrap', transform: 'rotate(-6deg)', opacity: 0.15, userSelect: 'none' }}>
+                <div style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(40px, 12vw, 15vw)', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px rgba(0,0,0,0.05)', whiteSpace: 'nowrap', transform: 'rotate(-6deg)', opacity: 0.15, userSelect: 'none' }}>
                     CRAFT CODE CRAFT CODE CRAFT
                 </div>
             </div>
 
             {/* ── Main Content ── */}
-            <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', maxWidth: '56rem', gap: '2rem' }}>
-                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(40px, 7vw, 72px)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', textTransform: 'uppercase', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', maxWidth: '56rem', gap: '2rem', width: '100%' }}>
+                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(28px, 6.5vw, 72px)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', textTransform: 'uppercase', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <span>LET'S CREATE</span>
-                    <span style={{ whiteSpace: 'nowrap' }}>SOMETHING BEYOND <span style={{ color: '#4cf3f6' }}>IDEA</span></span>
+                    <span className="whitespace-normal md:whitespace-nowrap">SOMETHING BEYOND <span style={{ color: '#4cf3f6' }}>IDEA</span></span>
                 </h2>
                 <p style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '18px', lineHeight: 1.6, maxWidth: '36rem', opacity: 0.8 }}>
                     I explore the space between code, creativity, and intelligence to build experiences that actually do something.
@@ -121,7 +121,8 @@ const CtaPivot = () => {
             {/* ── Multiplayer Cursor ── */}
             <div
                 ref={cursorRef}
-                style={{ position: 'absolute', zIndex: 20, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', left: '60%', top: '40%', pointerEvents: 'none', opacity: 0 }}
+                className="hidden md:flex"
+                style={{ position: 'absolute', zIndex: 20, flexDirection: 'column', alignItems: 'flex-start', left: '60%', top: '40%', pointerEvents: 'none', opacity: 0 }}
             >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: '#4cf3f6', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }}>
                     <path d="M5.5 3.5L18.5 10.5L12 13L9.5 20.5L5.5 3.5Z" fill="currentColor" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -132,7 +133,7 @@ const CtaPivot = () => {
             </div>
 
             {/* ── Decorative Wireframe Corner ── */}
-            <div style={{ position: 'absolute', bottom: '40px', left: '40px', width: '96px', height: '96px', border: '1px solid rgba(255,255,255,0.1)', pointerEvents: 'none', zIndex: 1 }}>
+            <div className="hidden sm:block" style={{ position: 'absolute', bottom: '40px', left: '40px', width: '96px', height: '96px', border: '1px solid rgba(255,255,255,0.1)', pointerEvents: 'none', zIndex: 1 }}>
                 <div style={{ position: 'absolute', top: -4, left: -4, width: 8, height: 8, backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
                 <div style={{ position: 'absolute', top: -4, right: -4, width: 8, height: 8, backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
                 <div style={{ position: 'absolute', bottom: -4, left: -4, width: 8, height: 8, backgroundColor: 'rgba(255,255,255,0.1)' }}></div>

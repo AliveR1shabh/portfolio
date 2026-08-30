@@ -31,16 +31,17 @@ const StyledWrapper = styled.div`
     background-color: #1c1c1e;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 16px;
-    padding: 24px 28px;
-    width: 380px;
+    padding: 24px clamp(16px, 5vw, 28px);
+    width: min(380px, 100%);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
     position: relative;
+    box-sizing: border-box;
   }
 
   .comment-body {
     color: #ffffff;
     font-family: 'Open Sans', 'Inter', sans-serif;
-    font-size: 26px;
+    font-size: clamp(20px, 6vw, 26px);
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.02em;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextScramble } from './core/text-scramble';
@@ -6,46 +6,50 @@ import SkillCards from './SkillCards';
 import HandLoader from './HandLoader';
 import InteractiveHelloSection from './InteractiveHelloSection';
 
-const projects = [
-    {
-        img: '/AnythingLibrary.png',
-        title: 'AnythingLibrary',
-        desc: 'A multi-AI platform that compares responses from multiple AI models side by side, powered by parallel processing and real-time orchestration.',
-        tags: ['Python', 'React', 'FastAPI'],
-        aspect: '4/3',
-        active: true,
-    },
-    {
-        img: '/GitHubPortfolioAnalyzer.png',
-        title: 'GitHub Portfolio Analyzer',
-        desc: 'Turn GitHub activity into actionable insights to identify skill gaps for your next career move.',
-        tags: ['Python', 'GitHub API', 'REST API'],
-        aspect: '3/4',
-    },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 const WorkCanvas = () => {
     const canvasRef = useRef(null);
     const card1Ref = useRef(null);
     const card2Ref = useRef(null);
+    const [screenState, setScreenState] = useState({ isDesktop: false, isTablet: false });
 
     useEffect(() => {
-        const refs = [card1Ref, card2Ref];
-        const speeds = [-100, -200];
-        const triggers = refs.map((ref, i) => {
-            return gsap.to(ref.current, {
-                y: speeds[i],
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: canvasRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true,
-                },
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setScreenState({
+                isDesktop: width >= 1024,
+                isTablet: width >= 768 && width < 1024
             });
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1024px)", () => {
+            const refs = [card1Ref, card2Ref];
+            const speeds = [-100, -200];
+            const triggers = refs.map((ref, i) => {
+                return gsap.to(ref.current, {
+                    y: speeds[i],
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: canvasRef.current,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                });
+            });
+
+            return () => triggers.forEach(t => t.scrollTrigger?.kill());
         });
 
-        return () => triggers.forEach(t => t.scrollTrigger?.kill());
+        return () => mm.revert();
     }, []);
 
     const cardStyle = (top, side, width, isRight) => ({
@@ -61,13 +65,13 @@ const WorkCanvas = () => {
         <section
             id="work"
             ref={canvasRef}
-            style={{ backgroundColor: '#fafaf8', color: '#131313', minHeight: '100vh', padding: '8rem 64px 96px', position: 'relative', overflow: 'hidden' }}
+            style={{ backgroundColor: '#fafaf8', color: '#131313', minHeight: '100vh', padding: 'clamp(4rem, 8vw, 8rem) var(--spacing-gutter, 24px) 96px', position: 'relative', overflow: 'hidden' }}
         >
             {/* Wireframe grid bg */}
             <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)', backgroundSize: '64px 64px', pointerEvents: 'none' }}></div>
 
-            <div style={{ position: 'relative', zIndex: 2, marginBottom: '8rem', maxWidth: '56rem' }} className="reveal-on-scroll">
-                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(40px, 7vw, 72px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ position: 'relative', zIndex: 2, marginBottom: 'clamp(4rem, 10vw, 8rem)', maxWidth: '56rem' }} className="reveal-on-scroll">
+                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(32px, 6vw, 72px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                     <TextScramble>SELECTED WORK</TextScramble>
                     <HandLoader />
                 </h2>
@@ -77,13 +81,13 @@ const WorkCanvas = () => {
             </div>
 
             {/* Simulated Cursors with drift animations from MCP */}
-            <div className="cursor-drift-1" style={{ position: 'absolute', top: '15%', left: '18%', zIndex: 20, pointerEvents: 'none' }}>
+            <div className="cursor-drift-1 hidden lg:block" style={{ position: 'absolute', top: '15%', left: '18%', zIndex: 20, pointerEvents: 'none' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fe2fd8" strokeWidth="2">
                     <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
                 </svg>
                 <div style={{ backgroundColor: '#fe2fd8', color: '#530045', fontFamily: '"JetBrains Mono", monospace', fontSize: '10px', padding: '2px 8px', borderRadius: '2px', marginTop: '4px', display: 'inline-block' }}>Designer</div>
             </div>
-            <div className="cursor-drift-2" style={{ position: 'absolute', top: '48%', right: '22%', zIndex: 20, pointerEvents: 'none' }}>
+            <div className="cursor-drift-2 hidden lg:block" style={{ position: 'absolute', top: '48%', right: '22%', zIndex: 20, pointerEvents: 'none' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4cf3f6" strokeWidth="2">
                     <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
                 </svg>
@@ -91,14 +95,40 @@ const WorkCanvas = () => {
             </div>
 
             {/* Cards area */}
-            <div style={{ position: 'relative', width: '100%', maxWidth: '80rem', margin: '0 auto', minHeight: '1200px' }}>
+            <div style={{ 
+                position: 'relative', 
+                width: '100%', 
+                maxWidth: '80rem', 
+                margin: '0 auto', 
+                minHeight: screenState.isDesktop ? '1200px' : 'auto',
+                display: screenState.isDesktop ? 'block' : 'flex',
+                flexDirection: 'column',
+                gap: screenState.isDesktop ? '0' : '64px'
+            }}>
                 {/* Interactive HELLO Button & Card in empty space */}
-                <div style={{ position: 'absolute', top: '-40px', right: '0px', zIndex: 25 }}>
+                <div style={{ 
+                    position: screenState.isDesktop ? 'absolute' : 'relative', 
+                    top: screenState.isDesktop ? '-40px' : 'auto', 
+                    right: screenState.isDesktop ? '0px' : 'auto', 
+                    display: 'flex',
+                    justifyContent: screenState.isDesktop ? 'flex-end' : screenState.isTablet ? 'flex-end' : 'center',
+                    marginBottom: screenState.isDesktop ? '0' : '2rem',
+                    zIndex: 25 
+                }}>
                     <InteractiveHelloSection />
                 </div>
 
                 {/* Card 1 – active, left */}
-                <article ref={card1Ref} style={cardStyle('0px', '0px', '600px', false)}>
+                <article 
+                    ref={card1Ref} 
+                    style={screenState.isDesktop ? cardStyle('0px', '0px', '600px', false) : {
+                        position: 'relative',
+                        width: '100%',
+                        maxWidth: '600px',
+                        margin: screenState.isTablet ? '0 auto 0 0' : '0 auto',
+                        cursor: 'pointer'
+                    }}
+                >
                     <div style={{ position: 'absolute', inset: '-8px', border: '2px solid #4cf3f6', pointerEvents: 'none', zIndex: 10 }}>
                         {['-top-1 -left-1', '-top-1 -right-1', '-bottom-1 -left-1', '-bottom-1 -right-1'].map((_, i) => (
                             <div key={i} style={{ position: 'absolute', width: 8, height: 8, backgroundColor: 'white', border: '1px solid #4cf3f6', ...(i === 0 ? { top: -4, left: -4 } : i === 1 ? { top: -4, right: -4 } : i === 2 ? { bottom: -4, left: -4 } : { bottom: -4, right: -4 }) }}></div>
@@ -121,7 +151,17 @@ const WorkCanvas = () => {
                     </div>
                 </article>
 
-                <article ref={card2Ref} style={cardStyle('400px', '0px', '500px', true)} className="group">
+                <article 
+                    ref={card2Ref} 
+                    style={screenState.isDesktop ? cardStyle('400px', '0px', '500px', true) : {
+                        position: 'relative',
+                        width: '100%',
+                        maxWidth: '500px',
+                        margin: screenState.isTablet ? '0 0 0 auto' : '0 auto',
+                        cursor: 'pointer'
+                    }} 
+                    className="group"
+                >
                     <div style={{ width: '100%', aspectRatio: '3/4', backgroundColor: '#131313', overflow: 'hidden', transition: 'transform 0.5s', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img src="/GitHubPortfolioAnalyzer.png" alt="GitHub Portfolio Analyzer" style={{ width: '90%', height: '90%', objectFit: 'contain', opacity: 1, transition: 'all 0.7s', borderRadius: '8px' }} />
                     </div>

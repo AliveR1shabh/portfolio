@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
   align-items: center;
   transform: scale(0.7);
   transform-origin: left center;
-  margin-left: 60px;
+  margin-left: clamp(12px, 4vw, 60px);
 
   .🤚 {
     --skin-color: #E4C560;

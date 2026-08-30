@@ -50,8 +50,9 @@ const StyledWrapper = styled.div`
 
     .card {
         position: relative;
-        width: 280px;
+        width: min(280px, 100%);
         height: 190px;
+        box-sizing: border-box;
         background-color: #131313;
         border-radius: 12px;
         display: flex;
