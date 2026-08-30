@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tertiary: #dcdddb;
+  --color-tertiary-container: #c0c1bf;
+  --color-surface-bright: #393939;
+  --color-secondary-container: #fe2fd8;
+  --color-inverse-primary: #00696b;
+  --color-on-secondary-container: #530045;
+  --color-surface-tint: #22dcdf;
+  --color-outline-variant: #3b4949;
+  --color-surface-dim: #131313;
+  --color-secondary-fixed-dim: #ffade3;
+  --color-on-primary-container: #00585a;
+  --color-surface-canvas: #fafaf8;
+  --color-error: #ffb4ab;
+  --color-inverse-surface: #e2e2e2;
+  --color-secondary: #ffade3;
+  --color-secondary-fixed: #ffd8ee;
+  --color-surface-variant: #353535;
+  --color-on-error: #690005;
+  --color-surface-container-low: #1b1b1b;
+  --color-tertiary-fixed: #e2e3e1;
+  --color-inverse-on-surface: #303030;
+  --color-on-secondary-fixed: #3a0030;
+  --color-outline: #859493;
+  --color-on-tertiary-fixed-variant: #454746;
+  --color-primary-fixed-dim: #22dcdf;
+  --color-on-background: #e2e2e2;
+  --color-on-surface: #e2e2e2;
+  --color-primary-fixed: #54f8fb;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-tertiary-fixed-dim: #c6c7c5;
+  --color-on-secondary-fixed-variant: #860071;
+  --color-surface-container: #1f1f1f;
+  --color-primary-container: #0fd6d9;
+  --color-on-tertiary-container: #4d4f4e;
+  --color-on-error-container: #ffdad6;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353535;
+  --color-on-secondary: #5f004f;
+  --color-on-tertiary-fixed: #1a1c1b;
+  --color-error-container: #93000a;
+  --color-background: #131313;
+  --color-primary: #4cf3f6;
+  --color-on-primary: #003738;
+  --color-border-wireframe: rgba(255, 255, 255, 0.1);
+  --color-surface-narrative: #000000;
+  --color-surface-pivot: #ffffff;
+  --color-on-primary-fixed: #002020;
+  --color-on-primary-fixed-variant: #004f51;
+  --color-on-surface-variant: #bacac9;
+  --color-text-muted: #9f9f9f;
+  --color-surface: #131313;
+  --color-on-tertiary: #2f3130;
+
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --spacing-section-py: 96px;
+  --spacing-base: 4px;
+  --spacing-canvas-runway: 128px;
+  --spacing-stack-lg: 32px;
+  --spacing-gutter-mobile: 24px;
+  --spacing-gutter-desktop: 64px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+
+  --font-body-sm: "Open Sans", sans-serif;
+  --font-code-block: "JetBrains Mono", monospace;
+  --font-headline-md: "Open Sans", sans-serif;
+  --font-body-lg: "Open Sans", sans-serif;
+  --font-headline-lg: "Open Sans", sans-serif;
+  --font-headline-lg-mobile: "Open Sans", sans-serif;
+  --font-mono-label: "JetBrains Mono", monospace;
+  --font-display-accent: "EB Garamond", serif;
+
+  --text-body-sm: 15px;
+  --text-body-sm--line-height: 1.5;
+  --text-code-block: 14px;
+  --text-code-block--line-height: 1.7;
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 1.3;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-headline-lg: 72px;
+  --text-headline-lg--line-height: 1.1;
+  --text-headline-lg-mobile: 40px;
+  --text-headline-lg-mobile--line-height: 1.2;
+  --text-mono-label: 12px;
+  --text-mono-label--line-height: 1;
+  --text-display-accent: 80px;
+  --text-display-accent--line-height: 1.1;
+}
+
+
+/* --- Base --- */
+body {
+    background-color: #000000;
+    color: #e2e2e2;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+::selection {
+    background-color: #4cf3f6;
+    color: #003738;
+}
+
+/* --- Global --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb { background: #3b4949; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4cf3f6; }
+
+.no-outline-mouse:focus:not(:focus-visible) { outline: none; }
+
+::selection { background: #0fd6d9; color: #003738; }
+
+/* --- CTA Pivot / Mode Flip --- */
+.ghost-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+}
+
+.mode-flip-section.is-light .outline-pill {
+    border-color: #000000;
+    color: #000000;
+}
+
+.mode-flip-section.is-light .outline-pill:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.multiplayer-cursor {
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+    pointer-events: none;
+}
+
+.mode-flip-section:hover .multiplayer-cursor {
+    opacity: 1;
+}
+
+/* --- Work Canvas --- */
+.handle {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border: 1px solid #4cf3f6;
+    position: absolute;
+    z-index: 10;
+}
+
+.wireframe-bg {
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+}
+
+/* --- Logo Loop (CTA Pivot) --- */
+@keyframes loop-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes loop-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+.animate-loop-left {
+    animation: loop-left 100s linear infinite;
+}
+.animate-loop-right {
+    animation: loop-right 100s linear infinite;
+}
+
+/* --- Work Canvas Scroll Animations --- */
+@keyframes reveal {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.reveal-on-scroll {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+}
+
+@keyframes pop-handle {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+.group:hover .handle, .active-box .handle {
+    animation: pop-handle 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.active-box .handle {
+    transform: scale(1);
+    animation: none;
+}
+
+/* --- Multiplayer Cursor Drift (Work Canvas) --- */
+@keyframes drift1 {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-30%, -60%); }
+}
+@keyframes drift2 {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-70%, -40%); }
+}
+.cursor-drift-1 { animation: drift1 8s ease-in-out infinite; }
+.cursor-drift-2 { animation: drift2 10s ease-in-out infinite; }
+
+/* --- Let's Collaborate button hover --- */
+.lets-collaborate-btn:hover {
+    padding-left: 56px;
+    padding-right: 24px;
+}
+.lets-collaborate-btn:hover .btn-arrow {
+    right: calc(100% - 44px) !important;
+    transform: rotate(45deg);
+}

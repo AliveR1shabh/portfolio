@@ -1,0 +1,129 @@
+:root {
+  --linear-ease: linear(
+    0,
+    0.068,
+    0.19 2.7%,
+    0.804 8.1%,
+    1.037,
+    1.199 13.2%,
+    1.245,
+    1.27 15.8%,
+    1.274,
+    1.272 17.4%,
+    1.249 19.1%,
+    0.996 28%,
+    0.949,
+    0.928 33.3%,
+    0.926,
+    0.932 37.3%,
+    0.993 47.7%,
+    1.011 53.6%,
+    1.014 59.7%,
+    0.997 73.6%,
+    1
+  );
+}
+
+.gooey-nav-container {
+  position: relative;
+  display: inline-block;
+}
+
+.gooey-nav-container nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+}
+
+.gooey-nav-container nav ul li {
+  border-radius: 100vw;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 0.5px 1.5px transparent;
+  color: white;
+}
+
+.gooey-nav-container nav ul li a {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 100vw;
+}
+
+.gooey-nav-container .effect {
+  position: absolute;
+  border-radius: 100vw;
+  pointer-events: none;
+  transition: left 0.4s var(--linear-ease), top 0.4s var(--linear-ease), width 0.4s var(--linear-ease), height 0.4s var(--linear-ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gooey-nav-container .effect.text {
+  color: white;
+  transition: color 0.3s ease, left 0.4s var(--linear-ease), top 0.4s var(--linear-ease), width 0.4s var(--linear-ease), height 0.4s var(--linear-ease);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gooey-nav-container .effect.text.active {
+  color: black;
+  background-color: white;
+}
+
+.gooey-nav-container .effect.filter {
+  /* filter disabled to keep clean white pill */
+}
+
+.gooey-nav-container .effect.filter::before {
+  display: none;
+}
+
+.gooey-nav-container .effect.filter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  border-radius: 100vw;
+}
+
+.gooey-nav-container .particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: float var(--time, 1200ms) ease-out forwards;
+}
+
+.gooey-nav-container .particle .point {
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: var(--color, white);
+  border-radius: 50%;
+  transform: scale(var(--scale, 1));
+}
+
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%) translate(var(--start-x, 0px), var(--start-y, 0px)) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--end-x, 0px), var(--end-y, 0px)) scale(0) rotate(var(--rotate, 0deg));
+    opacity: 0;
+  }
+}
