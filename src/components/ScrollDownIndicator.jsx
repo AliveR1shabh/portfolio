@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ScrollDownIndicator = () => {
+const ScrollDownIndicator = ({ onClick }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper onClick={onClick}>
       <div className="scrolldown" style={{'--color': 'skyblue'}}>
         <div className="chevrons">
           <div className="chevrondown" />
@@ -15,6 +15,15 @@ const ScrollDownIndicator = () => {
 }
 
 const StyledWrapper = styled.div`
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    transform: translateY(3px) scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(76, 243, 246, 0.6));
+  }
+
   .scrolldown {
     --color: white;
     --sizeX: 30px;
@@ -22,12 +31,16 @@ const StyledWrapper = styled.div`
     position: relative;
     width: var(--sizeX);
     height: var(--sizeY);
-    /* margin-left: calc(var(--sizeX) / 2); */
     border: calc(var(--sizeX) / 10) solid var(--color);
     border-radius: 50px;
     box-sizing: border-box;
     margin-bottom: 16px;
     cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+
+  &:hover .scrolldown {
+    --color: #4cf3f6;
   }
 
   .scrolldown::before {
@@ -87,6 +100,7 @@ const StyledWrapper = styled.div`
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
+    transition: border-color 0.3s ease;
   }
 
   .chevrondown:nth-child(odd) {

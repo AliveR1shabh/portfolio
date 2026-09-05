@@ -71,7 +71,7 @@ const WorkCanvas = () => {
             <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)', backgroundSize: '64px 64px', pointerEvents: 'none' }}></div>
 
             <div style={{ position: 'relative', zIndex: 2, marginBottom: 'clamp(4rem, 10vw, 8rem)', maxWidth: '56rem' }} className="reveal-on-scroll">
-                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(32px, 6vw, 72px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                <h2 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 'clamp(32px, 6vw, 72px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
                     <TextScramble>SELECTED WORK</TextScramble>
                     <HandLoader />
                 </h2>
@@ -118,7 +118,7 @@ const WorkCanvas = () => {
                     <InteractiveHelloSection />
                 </div>
 
-                {/* Card 1 – active, left */}
+                {/* Card 1 – AnythingLibrary (GitHub Link) */}
                 <article 
                     ref={card1Ref} 
                     style={screenState.isDesktop ? cardStyle('0px', '0px', '600px', false) : {
@@ -128,29 +128,42 @@ const WorkCanvas = () => {
                         margin: screenState.isTablet ? '0 auto 0 0' : '0 auto',
                         cursor: 'pointer'
                     }}
+                    className="group"
                 >
-                    <div style={{ position: 'absolute', inset: '-8px', border: '2px solid #4cf3f6', pointerEvents: 'none', zIndex: 10 }}>
-                        {['-top-1 -left-1', '-top-1 -right-1', '-bottom-1 -left-1', '-bottom-1 -right-1'].map((_, i) => (
-                            <div key={i} style={{ position: 'absolute', width: 8, height: 8, backgroundColor: 'white', border: '1px solid #4cf3f6', ...(i === 0 ? { top: -4, left: -4 } : i === 1 ? { top: -4, right: -4 } : i === 2 ? { bottom: -4, left: -4 } : { bottom: -4, right: -4 }) }}></div>
-                        ))}
-                        <div style={{ position: 'absolute', top: '-24px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#4cf3f6', color: '#003738', fontFamily: '"JetBrains Mono", monospace', fontSize: '10px', padding: '2px 4px', whiteSpace: 'nowrap' }}>600 x 400</div>
-                    </div>
-                    <div style={{ width: '100%', aspectRatio: '4/3', backgroundColor: '#131313', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', transition: 'transform 0.5s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src="/AnythingLibrary.png" alt="AnythingLibrary" style={{ width: '90%', height: '90%', objectFit: 'contain', opacity: 1, transition: 'all 0.7s', borderRadius: '8px' }} />
-                    </div>
-                    <div style={{ marginTop: '16px', paddingLeft: '8px' }}>
-                        <h3 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '32px', fontWeight: 600, letterSpacing: '-0.02em' }}>AnythingLibrary</h3>
-                        <p style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '15px', color: '#666', marginTop: '8px', marginBottom: '16px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                            A multi-AI platform that compares responses from multiple AI models side by side, powered by parallel processing and real-time orchestration.
-                        </p>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            {['Python', 'React', 'FastAPI'].map(tag => (
-                                <span key={tag} style={{ padding: '4px 12px', borderRadius: '9999px', border: '1px solid #3b4949', fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.05em' }}>{tag}</span>
+                    <a 
+                        href="https://github.com/AliveR1shabh/AnythingLibrary" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                        aria-label="View AnythingLibrary project on GitHub"
+                    >
+                        <div style={{ position: 'absolute', inset: '-8px', border: '2px solid #4cf3f6', pointerEvents: 'none', zIndex: 10 }}>
+                            {['-top-1 -left-1', '-top-1 -right-1', '-bottom-1 -left-1', '-bottom-1 -right-1'].map((_, i) => (
+                                <div key={i} style={{ position: 'absolute', width: 8, height: 8, backgroundColor: 'white', border: '1px solid #4cf3f6', ...(i === 0 ? { top: -4, left: -4 } : i === 1 ? { top: -4, right: -4 } : i === 2 ? { bottom: -4, left: -4 } : { bottom: -4, right: -4 }) }}></div>
                             ))}
+                            <div style={{ position: 'absolute', top: '-24px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#4cf3f6', color: '#003738', fontFamily: '"JetBrains Mono", monospace', fontSize: '10px', padding: '2px 4px', whiteSpace: 'nowrap' }}>600 x 400</div>
                         </div>
-                    </div>
+                        <div style={{ width: '100%', aspectRatio: '4/3', backgroundColor: '#131313', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', transition: 'transform 0.5s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:scale-[1.02]">
+                            <img src="/AnythingLibrary.png" alt="AnythingLibrary" style={{ width: '90%', height: '90%', objectFit: 'contain', opacity: 1, transition: 'all 0.7s', borderRadius: '8px' }} />
+                        </div>
+                        <div style={{ marginTop: '16px', paddingLeft: '8px' }}>
+                            <h3 className="group-hover:text-[#008080] transition-colors flex items-center gap-2" style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '32px', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                                <span>AnythingLibrary</span>
+                                <span className="material-symbols-outlined text-2xl opacity-70 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">open_in_new</span>
+                            </h3>
+                            <p style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '15px', color: '#666', marginTop: '8px', marginBottom: '16px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                                A multi-AI platform that compares responses from multiple AI models side by side, powered by parallel processing and real-time orchestration.
+                            </p>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                {['Python', 'React', 'FastAPI'].map(tag => (
+                                    <span key={tag} style={{ padding: '4px 12px', borderRadius: '9999px', border: '1px solid #3b4949', fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.05em' }}>{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </a>
                 </article>
 
+                {/* Card 2 – GitHub Portfolio Analyzer (GitHub Profile/Repo Link) */}
                 <article 
                     ref={card2Ref} 
                     style={screenState.isDesktop ? cardStyle('400px', '0px', '500px', true) : {
@@ -162,20 +175,31 @@ const WorkCanvas = () => {
                     }} 
                     className="group"
                 >
-                    <div style={{ width: '100%', aspectRatio: '3/4', backgroundColor: '#131313', overflow: 'hidden', transition: 'transform 0.5s', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src="/GitHubPortfolioAnalyzer.png" alt="GitHub Portfolio Analyzer" style={{ width: '90%', height: '90%', objectFit: 'contain', opacity: 1, transition: 'all 0.7s', borderRadius: '8px' }} />
-                    </div>
-                    <div style={{ marginTop: '16px', paddingLeft: '8px' }}>
-                        <h3 style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '32px', fontWeight: 600, letterSpacing: '-0.02em' }}>GitHub Portfolio Analyzer</h3>
-                        <p style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '15px', color: '#666', marginTop: '8px', marginBottom: '16px' }}>
-                            Turn GitHub activity into actionable insights to identify skill gaps for your next career move.
-                        </p>
-                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                            {['Python', 'GitHub API', 'REST API'].map(tag => (
-                                <span key={tag} style={{ padding: '4px 12px', borderRadius: '9999px', border: '1px solid #3b4949', fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.05em' }}>{tag}</span>
-                            ))}
+                    <a 
+                        href="https://github.com/AliveR1shabh" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                        aria-label="View GitHub Profile and Analyzer project on GitHub"
+                    >
+                        <div style={{ width: '100%', aspectRatio: '3/4', backgroundColor: '#131313', overflow: 'hidden', transition: 'transform 0.5s', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:scale-[1.02]">
+                            <img src="/GitHubPortfolioAnalyzer.png" alt="GitHub Portfolio Analyzer" style={{ width: '90%', height: '90%', objectFit: 'contain', opacity: 1, transition: 'all 0.7s', borderRadius: '8px' }} />
                         </div>
-                    </div>
+                        <div style={{ marginTop: '16px', paddingLeft: '8px' }}>
+                            <h3 className="group-hover:text-[#008080] transition-colors flex items-center gap-2" style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '32px', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                                <span>GitHub Portfolio Analyzer</span>
+                                <span className="material-symbols-outlined text-2xl opacity-70 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">open_in_new</span>
+                            </h3>
+                            <p style={{ fontFamily: '"Open Sans", sans-serif', fontSize: '15px', color: '#666', marginTop: '8px', marginBottom: '16px' }}>
+                                Turn GitHub activity into actionable insights to identify skill gaps for your next career move.
+                            </p>
+                            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                {['Python', 'GitHub API', 'REST API'].map(tag => (
+                                    <span key={tag} style={{ padding: '4px 12px', borderRadius: '9999px', border: '1px solid #3b4949', fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.05em' }}>{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </a>
                 </article>
             </div>
 

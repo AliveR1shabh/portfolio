@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useLenis } from 'lenis/react';
 import Particles from './Particles';
 import Loader from './Loader';
 import HireButton from './HireButton';
@@ -10,6 +11,26 @@ let wordIndex = 0;
 
 const Hero = () => {
     const textRef = useRef(null);
+    const lenis = useLenis();
+
+    const handleScrollToBottom = () => {
+        const targetScroll = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight
+        );
+
+        if (lenis) {
+            lenis.scrollTo(targetScroll, {
+                duration: 3.5,
+                easing: (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)
+            });
+        } else {
+            window.scrollTo({
+                top: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     useEffect(() => {
         const el = textRef.current;
@@ -79,10 +100,15 @@ const Hero = () => {
 
             {/* Scroll hint & Hire Button */}
             <div style={{ position: 'relative', zIndex: 10, marginTop: 'clamp(2rem, 8vw, 3rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(2rem, 6vw, 3rem)' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', opacity: 0.7 }}>
-                    <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bacac9' }}>Scroll</span>
-                    <ScrollDownIndicator />
-                </div>
+                <button
+                    onClick={handleScrollToBottom}
+                    aria-label="Scroll slowly to bottom of page"
+                    className="group transition-opacity duration-300 hover:opacity-100"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', opacity: 0.8 }}
+                >
+                    <span className="group-hover:text-[#4cf3f6] transition-colors" style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bacac9' }}>Scroll</span>
+                    <ScrollDownIndicator onClick={handleScrollToBottom} />
+                </button>
 
                 {/* Hire Button */}
                 <HireButton />

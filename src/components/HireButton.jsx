@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const HireButton = () => {
+  const [isActive, setIsActive] = useState(false);
+
   const handleClick = (e) => {
     e.preventDefault();
-    // Opens Gmail compose in new tab directly (works seamlessly on Brave/Chrome without OS protocol app setup)
+    // Opens Gmail compose in new tab directly
     window.open('https://mail.google.com/mail/?view=cm&fs=1&to=rishabhneedworks@gmail.com', '_blank', 'noopener,noreferrer');
     
     // Fallback attempt for desktop mail client
@@ -18,9 +20,16 @@ const HireButton = () => {
       <a 
         href="mailto:rishabhneedworks@gmail.com" 
         onClick={handleClick} 
-        className="hire-link"
+        onMouseEnter={() => setIsActive(true)}
+        onMouseLeave={() => setIsActive(false)}
+        onTouchStart={() => setIsActive(true)}
+        onTouchEnd={() => setIsActive(false)}
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setIsActive(false)}
+        className={`hire-link ${isActive ? 'is-active' : ''}`}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Hire Rishabh"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px">
           <rect width={36} height={36} x={0} y={0} fill="#fdd835" />
@@ -44,19 +53,16 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(1.1);
-
-  @media (min-width: 768px) {
-    transform: scale(1.45);
-  }
+  padding: 12px;
+  touch-action: manipulation;
 
   .hire-link {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 0 22px 0 12px;
-    height: 54px;
+    padding: 0 clamp(18px, 4vw, 26px) 0 clamp(10px, 2.5vw, 14px);
+    height: clamp(48px, 8vw, 58px);
     color: white;
     text-shadow: 2px 2px rgb(116, 116, 116);
     text-transform: uppercase;
@@ -64,55 +70,64 @@ const StyledWrapper = styled.div`
     border: solid 2.5px black;
     letter-spacing: 1px;
     font-weight: 700;
-    font-size: 19px;
+    font-size: clamp(16px, 3.5vw, 21px);
     background-color: hsl(49deg 98% 60%);
     border-radius: 50px;
     position: relative;
     overflow: hidden;
-    transition: all 0.5s ease;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
     text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
-  .hire-link:hover {
-    transform: scale(1.3);
+  .hire-link:hover,
+  .hire-link.is-active {
+    transform: scale(1.18);
+    box-shadow: 0 8px 25px rgba(253, 216, 53, 0.4);
   }
 
   .hire-link:active {
-    transform: scale(0.9);
-    transition: all 100ms ease;
+    transform: scale(0.95);
+    transition: transform 100ms ease;
   }
 
   .hire-link svg {
-    transition: all 0.5s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 2;
+    flex-shrink: 0;
   }
 
   .play {
-    transition: all 0.5s ease;
-    transition-delay: 300ms;
+    transition: transform 0.4s ease;
+    transition-delay: 150ms;
   }
 
-  .hire-link:hover svg {
-    transform: scale(3) translate(50%);
+  .hire-link:hover svg,
+  .hire-link.is-active svg {
+    transform: scale(2.8) translate(40%);
   }
 
   .now {
     position: absolute;
     left: 0;
     transform: translateX(-100%);
-    transition: all 0.5s ease;
+    transition: transform 0.4s ease;
     z-index: 2;
   }
 
-  .hire-link:hover .now {
-    transform: translateX(10px);
-    transition-delay: 300ms;
+  .hire-link:hover .now,
+  .hire-link.is-active .now {
+    transform: translateX(12px);
+    transition-delay: 150ms;
   }
 
-  .hire-link:hover .play {
+  .hire-link:hover .play,
+  .hire-link.is-active .play {
     transform: translateX(200%);
-    transition-delay: 300ms;
+    transition-delay: 150ms;
   }
 `;
 
